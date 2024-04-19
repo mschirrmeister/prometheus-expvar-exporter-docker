@@ -1,0 +1,160 @@
+# Address to listen on. Prometheus should be told to scrape this.
+listen_addr = ":8000"
+
+# Expvar target
+# RouteDNS running on Kubernetes
+[server]
+url = "routedns.blocky.svc.cluster.local/routedns/vars"
+insecure = true
+
+
+## Notes
+# Everythingwith a "#" gets automatically converted. 
+# You must specify the expvar metrics that are a map.
+#
+# For expvar lines like this:
+# "routedns.listener.local-udp.response": {"NOERROR": 776, "NXDOMAIN": 19}
+#
+# The result will look like this:
+# HELP routedns_listener_local_udp_response Various DNS response codes
+# TYPE routedns_listener_local_udp_response untyped
+# routedns_listener_local_udp_response{RCODE="NOERROR"} 776
+# routedns_listener_local_udp_response{RCODE="NXDOMAIN"} 19
+
+## Metrics mappings
+
+# m.routedns_client_bootstrap_resolver_drop.expvar = "routedns.client.bootstrap-resolver.drop"
+m.routedns_client_bootstrap_resolver_error.expvar = "routedns.client.bootstrap-resolver.error"
+m.routedns_client_bootstrap_resolver_error.help = "Amount of dropped requests"
+m.routedns_client_bootstrap_resolver_error.label_name = "REASON"
+# m.routedns_client_bootstrap_resolver_maxqueue.expvar = "routedns.client.bootstrap-resolver.maxqueue"
+# m.routedns_client_bootstrap_resolver_query.expvar = "routedns.client.bootstrap-resolver.query"
+m.routedns_client_bootstrap_resolver_response.expvar = "routedns.client.bootstrap-resolver.response"
+m.routedns_client_bootstrap_resolver_response.label_name = "RCODE"
+
+# m.routedns_cache_cache_entries.expvar = "routedns.cache.cache.entries"
+# m.routedns_cache_cache_entries.help = "routedns cache entries"
+# m.routedns_cache_cache_hit.expvar = "routedns.cache.cache.hit"
+# m.routedns_cache_cache_miss.expvar = "routedns.cache.cache.miss"
+
+# m.routedns_client_1001_doh_quic_drop.expvar = "routedns.client.1001-doh-quic.drop"
+m.routedns_client_1001_doh_quic_error.expvar = "routedns.client.1001-doh-quic.error"
+m.routedns_client_1001_doh_quic_error.label_name = "REASON"
+# m.routedns_client_1001_doh_quic_maxqueue.expvar = "routedns.1001-doh-quic.maxqueue"
+# m.routedns_client_1001_doh_quic_query.expvar = "routedns.client.1001-doh-quic.query"
+m.routedns_client_1001_doh_quic_response.expvar = "routedns.client.1001-doh-quic.response"
+m.routedns_client_1001_doh_quic_response.label_name = "RCODE"
+
+# m.routedns_client_1111-doh-quic_drop.expvar = "routedns.client.1111-doh-quic.drop"
+m.routedns_client_1111_doh_quic_error.expvar = "routedns.client.1111-doh-quic.error"
+m.routedns_client_1111_doh_quic_error.label_name = "REASON"
+# m.routedns_client_1111-doh-quic_maxqueue.expvar = "routedns.client.1111-doh-quic.maxqueue"
+# m.routedns_client_1111-doh-quic_query.expvar = "routedns.client.1111-doh-quic.query"
+m.routedns_client_1111_doh_quic_response.expvar = "routedns.client.1111-doh-quic.response"
+m.routedns_client_1111_doh_quic_response.label_name = "RCODE"
+
+# m.routedns_client_adguard_doh_quic_drop.expvar = "routedns.client.adguard-doh-quic.drop"
+m.routedns_client_adguard_doh_quic_error.expvar = "routedns.client.adguard-doh-quic.error"
+m.routedns_client_adguard_doh_quic_error.label_name = "REASON"
+# m.routedns_client_adguard_doh_quic_maxqueue.expvar = "routedns.client.adguard-doh-quic.maxqueue"
+# m.routedns_client_adguard_doh_quic_query.expvar = "routedns.client.adguard-doh-quic.query"
+m.routedns_client_adguard_doh_quic_response.expvar = "routedns.client.adguard-doh-quic.response"
+m.routedns_client_adguard_doh_quic_response.label_name = "RCODE"
+
+# m.routedns_client_adguard-doq_drop.expvar = "routedns.client.adguard-doq.drop"
+m.routedns_client_adguard_doq_quic_error.expvar = "routedns.client.adguard-doq-quic.error"
+m.routedns_client_adguard_doq_quic_error.label_name = "REASON"
+# m.routedns_client_adguard-doq_maxqueue.expvar = "routedns.client.adguard-doq.maxqueue"
+# m.routedns_client_adguard-doq_query.expvar = "routedns.client.adguard-doq.query"
+m.routedns_client_adguard_doq_quic_response.expvar = "routedns.client.adguard-doq-quic.response"
+m.routedns_client_adguard_doq_quic_response.label_name = "RCODE"
+
+# m.routedns_client_cloudflare_1001_doh_drop.expvar = "routedns.client.cloudflare-1001-doh.drop"
+m.routedns_client_cloudflare_1001_doh_error.expvar = "routedns.client.cloudflare-1001-doh.error"
+m.routedns_client_cloudflare_1001_doh_error.label_name = "REASON"
+# m.routedns_client_cloudflare_1001_doh_maxqueue.expvar = "routedns.client.cloudflare-1001-doh.maxqueue"
+# m.routedns_client_cloudflare_1001_doh_query.expvar = "routedns.client.cloudflare-1001-doh.query"
+m.routedns_client_cloudflare_1001_doh_response.expvar = "routedns.client.cloudflare-1001-doh.response"
+m.routedns_client_cloudflare_1001_doh_response.label_name = "RCODE"
+
+# m.routedns_client_cloudflare_1111_doh_drop.expvar = "routedns.client.cloudflare_1111_doh.drop"
+m.routedns_client_cloudflare_1111_doh_error.expvar = "routedns.client.cloudflare_1111_doh.error"
+m.routedns_client_cloudflare_1111_doh_error.label_name = "REASON"
+# m.routedns_client_cloudflare_1111_doh_maxqueue.expvar = "routedns.client.cloudflare_1111_doh.maxqueue"
+# m.routedns_client_cloudflare_1111_doh_query.expvar = "routedns.client.cloudflare_1111_doh.query"
+m.routedns_client_cloudflare_1111_doh_response.expvar = "routedns.client.cloudflare_1111_doh.response"
+m.routedns_client_cloudflare_1111_doh_response.label_name = "RCODE"
+
+# m.routedns_client_cloudflare_doh_quic_drop.expvar = "routedns.client.cloudflare-doh-quic.drop"
+m.routedns_client_cloudflare_doh_quic_error.expvar = "routedns.client.cloudflare_doh-quic.error"
+m.routedns_client_cloudflare_doh_quic_error.label_name = "REASON"
+# m.routedns_client_cloudflare-doh_quic_maxqueue.expvar = "routedns.client.cloudflare-doh-quic.maxqueue"
+# m.routedns_client_cloudflare-doh_quic_query.expvar = "routedns.client.cloudflare-doh-quic.query"
+m.routedns_client_cloudflare_doh_quic_response.expvar = "routedns.client.cloudflare_doh-quic.response"
+m.routedns_client_cloudflare_doh_quic_response.label_name = "RCODE"
+
+# m.routedns_client_cloudflare_dot_1_drop.expvar = "routedns.client.cloudflare-dot-1.drop"
+m.routedns_client_cloudflare_dot_1_error.expvar = "routedns.client.cloudflare_dot-1.error"
+m.routedns_client_cloudflare_dot_1_error.label_name = "REASON"
+# m.routedns_client_cloudflare_dot_1_maxqueue.expvar = "routedns.client.cloudflare-dot-1.maxqueue"
+# m.routedns_client_cloudflare_dot_1_query.expvar = "routedns.client.cloudflare-dot-1.query"
+m.routedns_client_cloudflare_dot_1_response.expvar = "routedns.client.cloudflare_dot-1.response"
+m.routedns_client_cloudflare_dot_1_response.label_name = "RCODE"
+
+# m.routedns_client_cloudflare_dot_2_drop.expvar = "routedns.client.cloudflare-dot-2.drop"
+m.routedns_client_cloudflare_dot_2_error.expvar = "routedns.client.cloudflare_dot-2.error"
+m.routedns_client_cloudflare_dot_2_error.label_name = "REASON"
+# m.routedns_client_cloudflare_dot_2_maxqueue.expvar = "routedns.client.cloudflare-dot-2.maxqueue"
+# m.routedns_client_cloudflare_dot_2_query.expvar = "routedns.client.cloudflare-dot-2.query"
+m.routedns_client_cloudflare_dot_2_response.expvar = "routedns.client.cloudflare_dot-2.response"
+m.routedns_client_cloudflare_dot_2_response.label_name = "RCODE"
+
+# m.routedns_client_controld_doh_quic_drop.expvar = "routedns.client.controld-doh-quic.drop"
+m.routedns_client_controld_doh_quic_error.expvar = "routedns.client.controld-doh-quic.error"
+m.routedns_client_controld_doh_quic_error.label_name = "REASON"
+# m.routedns_client_controld_doh_quic_maxqueue.expvar = "routedns.client.controld-doh-quic.drop"
+# m.routedns_client_controld_doh_quic_query.expvar = "routedns.client.controld-doh-quic.query"
+m.routedns_client_controld_doh_quic_response.expvar = "routedns.client.controld-doh-quic.response"
+m.routedns_client_controld_doh_quic_response.label_name = "RCODE"
+
+# m.routedns_client_controld_doq_drop.expvar = "routedns.client.controld-doq.drop"
+m.routedns_client_controld_doq_error.expvar = "routedns.client.controld-doq.error"
+m.routedns_client_controld_doq_error.label_name = "REASON"
+# m.routedns_client_controld_doq_maxqueue.expvar = "routedns.client.controld-doq.maxqueue"
+# m.routedns_client_controld_doq_query.expvar = "routedns.client.controld-doq.query"
+m.routedns_client_controld_doq_response.expvar = "routedns.client.controld-doq.response"
+m.routedns_client_controld_doq_response.label_name = "RCODE"
+
+# m.routedns_client_loopx_roo_doh_quic_drop.expvar = "routedns.client.loopx-roo-doh-quic.drop"
+m.routedns_client_loopx_roo_doh_quic_error.expvar = "routedns.client.loopx-roo-doh-quic.error"
+m.routedns_client_loopx_roo_doh_quic_error.label_name = "REASON"
+# m.routedns_client_loopx_roo_doh_quic_maxqueue.expvar = "routedns.client.loopx-roo-doh-quic.maxqueue"
+# m.routedns_client_loopx_roo_doh_quic_query.expvar = "routedns.client.loopx-roo-doh-quic.query"
+m.routedns_client_loopx_roo_doh_quic_response.expvar = "routedns.client.loopx-roo-doh-quic.response"
+m.routedns_client_loopx_roo_doh_quic_response.label_name = "RCODE"
+
+# m.routedns_client_loopx_roo_doq_drop.expvar = "routedns.client.loopx-roo-doq.drop"
+m.routedns_client_loopx_roo_doq_error.expvar = "routedns.client.loopx-roo-doq.error"
+m.routedns_client_loopx_roo_doq_error.label_name = "REASON"
+# m.routedns_client_loopx_roo_doq_maxqueue.expvar = "routedns.client.loopx-roo-doq.maxqueue"
+# m.routedns_client_loopx_roo_doq_query.expvar = "routedns.client.loopx-roo-doq.query"
+m.routedns_client_loopx_roo_doq_response.expvar = "routedns.client.loopx-roo-doq.response"
+m.routedns_client_loopx_roo_doq_response.label_name = "RCODE"
+
+# m.routedns_listener_local_tcp_drop.expvar = "routedns.listener.local-tcp.drop"
+m.routedns_listener_local_tcp_error.expvar = "routedns.listener.local-tcp.error"
+m.routedns_listener_local_tcp_error.label_name = "REASON"
+# m.routedns_listener_local_tcp_maxqueue.expvar = "routedns.listener.local-tcp.maxqueue"
+# m.routedns_listener_local_tcp_query.expvar = "routedns.listener.local-tcp.query"
+m.routedns_listener_local_tcp_response.expvar = "routedns.listener.local-tcp.response"
+m.routedns_listener_local_tcp_response.label_name = "RCODE"
+
+# m.routedns_listener_local_udp_drop.expvar = "routedns.listener.local-udp.drop"
+m.routedns_listener_local_udp_error.expvar = "routedns.listener.local-udp.error"
+m.routedns_listener_local_udp_error.label_name = "REASON"
+# m.routedns_listener_local_udp_maxqueue.expvar = "routedns.listener.local-udp.maxqueue"
+# m.routedns_listener_local_udp_query.expvar = "routedns.listener.local-udp.query"
+m.routedns_listener_local_udp_response.expvar = "routedns.listener.local-udp.response"
+m.routedns_listener_local_udp_response.help = "Various DNS response codes"
+m.routedns_listener_local_udp_response.label_name = "RCODE"
+

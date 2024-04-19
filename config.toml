@@ -1,0 +1,10 @@
+# Address to listen on. Prometheus should be told to scrape this.
+listen_addr = ":8000"
+
+# Expvar target.
+# You MUST change this to your expvar target!
+[server]
+url = "https://raw.githubusercontent.com/albertito/prometheus-expvar-exporter/next/test/t-00-basic.vars"
+insecure = false
+
+
